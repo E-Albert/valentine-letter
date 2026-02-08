@@ -1,13 +1,13 @@
-
-import './App.css'
+import Envelope from "./components/Envelope";
+import "./styles/envelope.css";
 
 function App() {
-
   return (
     <div>
-      <h1>Valentine Letter</h1>
+      <h2>Click to open</h2>
+      <Envelope />
     </div>
   );
 }
 
-export default App
+export default App;

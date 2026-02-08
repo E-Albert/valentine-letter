@@ -1,0 +1,30 @@
+.envelope-container {
+  position: relative;
+  width: 70vw;
+  max-width: 360px;
+}
+
+.envelope-container img {
+  width: 100%;
+  display: block;
+}
+
+/* Layering */
+.letter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.envelope-body {
+  position: relative;
+  z-index: 2;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 1%;
+  left: 0;
+  z-index: 3;
+}
