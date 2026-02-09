@@ -1,30 +1,126 @@
 .envelope-container {
-  position: relative;
-  width: 70vw;
-  max-width: 360px;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
 }
+
 
 .envelope-container img {
   width: 100%;
   display: block;
 }
 
+.envelope-stage {
+  position: relative;
+  width: 70vw;
+  max-width: 360px;
+  aspect-ratio: 1 / 1; /* key */
+  line-height: 0;
+}
+
+
+.envelope-stage img {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+
 /* Layering */
 .letter {
-  position: absolute;
-  top: 0;
-  left: 0;
+  top: -20%;
   z-index: 1;
 }
 
 .envelope-body {
-  position: relative;
   z-index: 2;
 }
 
 .envelope-flap {
+  top: 1%;
+  z-index: 3;
+  transform-style: preserve-3d;
+}
+
+
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cta {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.flap-wrapper {
   position: absolute;
   top: 1%;
   left: 0;
+  width: 100%;
+  perspective: 1200px;
   z-index: 3;
 }
+
+.flap {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transform-origin: top center;
+}
+
+/* Both faces */
+.flap-front,
+.flap-back {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  backface-visibility: hidden;
+}
+
+/* Front of flap */
+.flap-front {
+  transform: rotateX(0deg) translateZ(1px);
+}
+
+/* Inside of flap */
+.flap-back {
+  transform: rotateX(180deg) rotateZ(180deg);
+}
+
+.envelope-body-inner {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  opacity: 0; /* hidden when closed */
+}
+
+.letter {
+  position: absolute;
+  z-index: 2;
+}
+
+.envelope-body-front {
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+}
+
+.envelope-body-inner.open {
+  opacity: 1;
+  z-index: 2;
+}
+
+.letter.open {
+  z-index: 3; /* letter sits inside envelope */
+}
+
+.envelope-body-front.open {
+  z-index: 1; /* front body goes behind */
+}
+

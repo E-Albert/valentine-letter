@@ -3,8 +3,8 @@ import "./styles/envelope.css";
 
 function App() {
   return (
-    <div>
-      <h2>Click to open</h2>
+    <div className="page">
+      <h2 className="cta">Click to open</h2>
       <Envelope />
     </div>
   );

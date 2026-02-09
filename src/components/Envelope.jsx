@@ -1,17 +1,49 @@
-import envelopeBody from "../assets/envelope-body.png";
-import envelopeFlap from "../assets/envelopeFlap.png";
-import letter from "../assets/letter.png";
+import { useState } from "react";
+import letter from "../assets/envelope-letter.png"
+import envelopeBody from "../assets/envelope-body.png"
+import envelopeFlap from "../assets/envelope-head.png"
+import envelopeBackFlap from "../assets/envelope-backhead.png";
+import envelopeInnerBody from "../assets/envelope-innerbody.png";
 
-import React from 'react'
+import { motion } from "framer-motion";
 
-const Envelope = () => {
+function Envelope() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="envelope-container">
-      <img src={letter} alt="Letter" className="letter" />
-      <img src={envelopeBody} alt="Envelope body" className="envelope-body" />
-      <img src={envelopeFlap} alt="Envelope flap" className="envelope-flap" />
+    <div className="envelope-container" onClick={() => setIsOpen(true)}>
+      <div className="envelope-stage">
+        <img
+          src={envelopeInnerBody}
+          className={`envelope-body-inner ${isOpen ? "open" : ""}`}
+        />
+
+        <img src={letter} className={`letter ${isOpen ? "open" : ""}`} />
+
+        <img
+          src={envelopeBody}
+          className={`envelope-body-front ${isOpen ? "open" : ""}`}
+        />
+
+        <div className="flap-wrapper">
+          <motion.div
+            className="flap"
+            initial={{ rotateX: 0, y: 0 }}
+            animate={{
+              rotateX: isOpen ? -180 : 0,
+              y: isOpen ? 12 : 0, // 👈 small downward settle
+            }}
+            transition={{
+              rotateX: { duration: 0.8, ease: "easeInOut" },
+              y: { duration: 0.3, ease: "easeOut", delay: 0.25 },
+            }}
+          >
+            <img src={envelopeFlap} className="flap-front" alt="" />
+            <img src={envelopeBackFlap} className="flap-back" alt="" />
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }
-
-export default Envelope
+export default Envelope;
