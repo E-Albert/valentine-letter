@@ -28,9 +28,12 @@
 
 /* Layering */
 .letter {
-  top: -20%;
-  z-index: 1;
+  position: absolute;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
 }
+
 
 .envelope-body {
   z-index: 2;
@@ -122,5 +125,11 @@
 
 .envelope-body-front.open {
   z-index: 1; /* front body goes behind */
+}
+
+.envelope-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
 

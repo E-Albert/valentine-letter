@@ -1,7 +1,7 @@
 import { useState } from "react";
-import letter from "../assets/envelope-letter.png"
-import envelopeBody from "../assets/envelope-body.png"
-import envelopeFlap from "../assets/envelope-head.png"
+import letter from "../assets/valentine-letter.png";
+import envelopeBody from "../assets/envelope-body.png";
+import envelopeFlap from "../assets/envelope-head.png";
 import envelopeBackFlap from "../assets/envelope-backhead.png";
 import envelopeInnerBody from "../assets/envelope-innerbody.png";
 
@@ -18,7 +18,13 @@ function Envelope() {
           className={`envelope-body-inner ${isOpen ? "open" : ""}`}
         />
 
-        <img src={letter} className={`letter ${isOpen ? "open" : ""}`} />
+        <motion.img
+          src={letter}
+          className="letter"
+          alt=""
+          initial={{ y: 180, opacity: 0 }}
+          animate={{ y: 180, opacity: 0 }}
+        />
 
         <img
           src={envelopeBody}
