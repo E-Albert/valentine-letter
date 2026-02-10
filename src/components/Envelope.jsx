@@ -8,10 +8,17 @@ import envelopeInnerBody from "../assets/envelope-innerbody.png";
 import { motion } from "framer-motion";
 
 function Envelope() {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [letterReleased, setLetterReleased] = useState(false);
 
   return (
-    <div className="envelope-container" onClick={() => setIsOpen(true)}>
+    <div
+      className="envelope-container"
+      onClick={() => {
+        setIsOpen(true);
+        setTimeout(() => setLetterReleased(true), 650);
+      }}
+    >
       <div className="envelope-stage">
         <img
           src={envelopeInnerBody}
@@ -20,10 +27,23 @@ function Envelope() {
 
         <motion.img
           src={letter}
-          className="letter"
+          className={`letter ${letterReleased ? "released" : ""}`}
           alt=""
-          initial={{ y: 180, opacity: 0 }}
-          animate={{ y: 180, opacity: 0 }}
+          initial={{
+            scale: 0.2,
+            opacity: 0,
+            y: 0,
+          }}
+          animate={{
+            scale: letterReleased ? 1 : 0.2,
+            opacity: letterReleased ? 1 : 0,
+            y: letterReleased ? -120 : 0, // 👈 THIS IS THE FIX
+          }}
+          transition={{
+            scale: { duration: 0.8, ease: "easeOut" },
+            opacity: { duration: 0.3 },
+            y: { duration: 0.6, ease: "easeOut" },
+          }}
         />
 
         <img
